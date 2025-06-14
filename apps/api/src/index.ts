@@ -8,13 +8,20 @@ const port = 3000;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+console.log('SOME MESSAGE');
+
 app.get('/api/spells', async (req: Request, res: Response) => {
   const { domain, skip, take } = req.query;
 
   const queryParams: { take: number; skip?: number } = {
-    take: Math.min(!Number.isNaN(take) ? Number(take) : 10, 50),
-    skip: !Number.isNaN(skip) && Number(skip) > 0 ? Number(skip) : 0,
+    take: Math.min(
+      !isNaN(Number(take)) && Number(take) > 0 ? Number(take) : 10,
+      50
+    ),
+    skip: !isNaN(Number(skip)) && Number(skip) > 0 ? Number(skip) : 0,
   };
+
+  res.send(queryParams);
 
   const spells = await prisma.spell.findMany({
     where: {
@@ -34,6 +41,7 @@ app.get('/api/spells', async (req: Request, res: Response) => {
 
 // Example route with types
 app.get('/api/spells/:spellName', async (req: Request, res: Response) => {
+  console.log('something');
   const spell = await prisma.spell.findUnique({
     where: {
       id: req.params.spellName,

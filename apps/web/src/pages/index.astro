@@ -64,7 +64,6 @@ import '../styles/global.css';
     button?.addEventListener('click', async () => {
       if (!input || !input.value) return;
       const { data, error } = await actions.getSpell({ value: input.value });
-      console.log({ data, error, spellId: input.value });
 
       if (!error && data && output) {
         output.innerHTML = JSON.stringify(data, null, 2);

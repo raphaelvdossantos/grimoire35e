@@ -5,7 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "nodemon",
-    "start": "node dist/main.js"
+    "build": "tsc",
+    "start": "node dist/src/index.js"
   },
   "keywords": [
     "dnd",
