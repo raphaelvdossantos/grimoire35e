@@ -8,8 +8,6 @@ const port = 3000;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-console.log('SOME MESSAGE');
-
 app.get('/api/spells', async (req: Request, res: Response) => {
   const { domain, skip, take } = req.query;
 
