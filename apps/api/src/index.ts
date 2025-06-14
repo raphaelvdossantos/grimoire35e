@@ -21,8 +21,6 @@ app.get('/api/spells', async (req: Request, res: Response) => {
     skip: !isNaN(Number(skip)) && Number(skip) > 0 ? Number(skip) : 0,
   };
 
-  res.send(queryParams);
-
   const spells = await prisma.spell.findMany({
     where: {
       domain: Boolean(domain),
