@@ -7,9 +7,7 @@ export const server = {
       value: z.string(),
     }),
     handler: async (input) => {
-      const data = await fetch(
-        'http://localhost:3000/api/'.concat(input.value)
-      );
+      const data = await fetch(import.meta.env.API_URL.concat(input.value));
       if (!data) return { message: 'spell not found' };
 
       const spell = await data.json();
