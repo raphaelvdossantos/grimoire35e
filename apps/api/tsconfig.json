@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "target": "es2016",
+    "module": "commonjs" /* Specify what module code is generated. */,
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "strict": true,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+  }
+}

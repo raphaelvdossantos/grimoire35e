@@ -1,0 +1,24 @@
+---
+const routes = [
+  { name: 'Home', path: '/' },
+  { name: 'API Docs', path: '/docs' },
+];
+---
+
+<nav
+  class='w-full bg-[#232136] border-b border-[#313244] py-3 px-4 sm:px-8 flex items-center gap-6'
+>
+  <div class='flex gap-4'>
+    {
+      routes.map((route) => (
+        <a
+          href={route.path}
+          class="text-[#a6adc8] hover:text-[#f5e0dc] font-semibold transition-colors duration-150 py-1 px-2 rounded-md
+          {Astro.url.pathname === route.path ? 'bg-[#181825] text-[#f5e0dc]' : ''}"
+        >
+          {route.name}
+        </a>
+      ))
+    }
+  </div>
+</nav>

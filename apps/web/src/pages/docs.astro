@@ -1,0 +1,173 @@
+---
+import '../styles/global.css';
+import Nav from '../layouts/nav.astro';
+---
+
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Grimoire 3.5e API Documentation</title>
+    <meta
+      name='description'
+      content='API documentation for Grimoire 3.5e D&D spell API.'
+    />
+  </head>
+  <body class='bg-[#181825] text-[#a6adc8] font-sans'>
+    <Nav />
+    <main class='max-w-3xl mx-auto px-4 sm:px-8 py-12'>
+      <h1
+        class='text-4xl font-bold mb-10 text-[#f5e0dc] tracking-tight drop-shadow'
+      >
+        Grimoire 3.5e API Documentation
+      </h1>
+
+      <section class='mb-12 pb-8 border-b border-[#313244]'>
+        <div
+          class='inline-block mb-3 px-4 py-2 rounded-lg bg-gradient-to-r from-[#a6e3a1] to-[#89b4fa] text-[#181825] font-bold text-xl shadow'
+        >
+          <span
+            class='font-mono font-bold text-[#a6e3a1] bg-[#313244] px-2 py-1 rounded mr-2 text-base'
+            >GET</span
+          >
+          <span
+            class='font-mono text-[#89b4fa] bg-[#232136] px-2 py-1 rounded text-base'
+            >/api/spells</span
+          >
+        </div>
+        <p class='mt-2'>Returns a paginated list of spells.</p>
+        <h3 class='font-semibold text-[#f9e2af] mt-6 mb-2 text-lg'>
+          Query Parameters:
+        </h3>
+        <ul class='list-disc ml-8 mb-4'>
+          <li>
+            <span class='font-bold'>domain</span> (optional): Filter by domain spells
+            (any value, e.g. <code>?domain=true</code>).
+          </li>
+          <li>
+            <span class='font-bold'>skip</span> (optional): Number of spells to skip
+            (for pagination).
+          </li>
+          <li>
+            <span class='font-bold'>take</span> (optional): Number of spells to return
+            (max 50).
+          </li>
+        </ul>
+        <h3 class='font-semibold text-[#f9e2af] mt-6 mb-2 text-lg'>Example:</h3>
+        <pre
+          class='rounded-xl bg-[#232136] text-[#cdd6f4] px-6 py-4 text-sm mb-6 mt-2 font-mono whitespace-pre overflow-x-auto'>
+<span class="font-bold text-[#a6e3a1]">GET</span> <span class="text-[#89b4fa]">http://localhost:3000/api/spells?take=5</span>
+        </pre>
+        <h3 class='font-semibold text-[#f9e2af] mt-6 mb-2 text-lg'>
+          Response:
+        </h3>
+        <pre
+          class='rounded-xl bg-[#232136] text-[#cdd6f4] px-6 py-4 text-sm mt-2 font-mono whitespace-pre overflow-x-auto'
+          id='query-spell-example'>
+        </pre>
+      </section>
+
+      <section class='mb-12 pb-8 border-b border-[#313244]'>
+        <div
+          class='inline-block mb-3 px-4 py-2 rounded-lg bg-gradient-to-r from-[#a6e3a1] to-[#89b4fa] text-[#181825] font-bold text-xl shadow'
+        >
+          <span
+            class='font-mono font-bold text-[#a6e3a1] bg-[#313244] px-2 py-1 rounded mr-2 text-base'
+            >GET</span
+          >
+          <span
+            class='font-mono text-[#89b4fa] bg-[#232136] px-2 py-1 rounded text-base'
+            >/api/spells/:spellName</span
+          >
+        </div>
+        <p>
+          Returns a single spell by its <code>id</code> (use the spell's id, not
+          its display name).
+        </p>
+        <h3 class='font-semibold text-[#f9e2af] mt-6 mb-2 text-lg'>
+          Path Parameters:
+        </h3>
+        <ul class='list-disc ml-8 mb-4'>
+          <li>
+            <span class='font-bold'>spellName</span>: The <code>id</code> of the
+            spell (e.g. <code>acid_arrow</code>).
+          </li>
+        </ul>
+        <h3 class='font-semibold text-[#f9e2af] mt-6 mb-2 text-lg'>Example:</h3>
+        <pre
+          class='rounded-xl bg-[#232136] text-[#cdd6f4] px-6 py-4 text-sm mb-6 mt-2 font-mono whitespace-pre overflow-x-auto'>
+<span class="font-bold text-[#a6e3a1]">GET</span> <span class="text-[#89b4fa]">http://localhost:3000/api/spells/acid_arrow</span>
+        </pre>
+        <h3 class='font-semibold text-[#f9e2af] mt-6 mb-2 text-lg'>
+          Response:
+        </h3>
+        <pre
+          class='rounded-xl bg-[#232136] text-[#cdd6f4] px-6 py-4 text-sm mt-2 font-mono whitespace-pre overflow-x-auto'
+          id='query-by-id-example'>
+        </pre>
+      </section>
+
+      <section class='mb-8'>
+        <div
+          class='inline-block mb-3 px-4 py-2 rounded-lg bg-gradient-to-r from-[#a6e3a1] to-[#89b4fa] text-[#181825] font-bold text-xl shadow'
+        >
+          Error Handling
+        </div>
+        <p>
+          All endpoints return <code>500</code> with a JSON error message on server
+          error:
+        </p>
+        <pre
+          class='rounded-xl bg-[#232136] text-[#cdd6f4] px-6 py-4 text-sm mt-2 font-mono whitespace-pre overflow-x-auto'
+          id='error-example'>
+        </pre>
+      </section>
+    </main>
+  </body>
+  <script>
+    const queryExampleData = {
+      count: 5,
+      results: [
+        {
+          id: 'acid_arrow',
+          name: 'Acid Arrow',
+          domain: false,
+          level: [{ id: 'acid_arrow', level: [{ Wizard: 2 }] }],
+          url: '/api/spells/acid_arrow',
+        },
+        // ...
+      ],
+    };
+
+    const queryByIdExampleData = {
+      id: 'acid_arrow',
+      name: 'Acid Arrow',
+      level: ['...'],
+      component: '...',
+      casting_time: '...',
+      range: '...',
+      target_or_area: '...',
+      duration: '...',
+      saving_throw: '...',
+      spell_resistance: false,
+      domain: false,
+      spell_domain: [],
+      description: '...',
+    };
+
+    const errorExample = {
+      error: 'Error message',
+    };
+    const queryPre = document.getElementById('query-spell-example');
+    if (queryPre)
+      queryPre.innerText = JSON.stringify(queryExampleData, null, 2);
+
+    const queryById = document.getElementById('query-by-id-example');
+    if (queryById)
+      queryById.innerText = JSON.stringify(queryByIdExampleData, null, 2);
+
+    const queryError = document.getElementById('error-example');
+    if (queryError)
+      queryError.innerHTML = JSON.stringify(errorExample, null, 2);
+  </script>
+</html>

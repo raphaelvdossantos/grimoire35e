@@ -1,0 +1,74 @@
+---
+import Nav from '../layouts/nav.astro';
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>Grimoire 3.5e - Dungeons & Dragons Spell Search</title>
+    <meta
+      name='description'
+      content='Search for Dungeons & Dragons 3.5e spells. Grimoire 3.5e is your RPG spellbook and reference for D&D 3.5 edition.'
+    />
+    <meta
+      name='keywords'
+      content='Dungeons and Dragons, D&D, DnD, 3.5e, RPG, spellbook, spells, API, Grimoire'
+    />
+    <meta name='author' content='Grimoire 3.5e' />
+    <link rel='icon' href='favicon.ico' />
+  </head>
+
+  <body>
+    <Nav />
+    <main class='bg-[#181825]'>
+      <div class='flex flex-col justify-center items-center h-[100vh] w-full'>
+        <div class='flex w-full mb-6 max-w-4xl'>
+          <input
+            type='text'
+            value="http://localhost:3000/api/"
+            disabled
+            class='py-2 px-2 text-sm text-center outline-0 w-fit rounded-bl-sm rounded-tl-sm border-1 border-r-0 text-lg border-black text-gray-800 bg-gray-400 text-md italic'
+          ></input>
+          <input
+            type='text'
+            id='spell-input'
+            placeholder='Enter a spell name...'
+            required
+            class='py-3 px-5 outline-0 w-full border-1 border-r-0 border-l-0 text-lg border-black text-gray-200 bg-[#232136]'
+          />
+          <button
+            class='text-gray-200 rounded-tr-sm rounded-br-sm border border-l-0 border-black min-w-1/4 bg-black cursor-pointer'
+            id='search-button'>Search</button
+          >
+        </div>
+        <pre
+          
+          class='bg-[#232136] w-full max-w-4xl max-h-3/5 p-4 rounded-md min-h-32 font-mono text-[#a6adc8] text-wrap overflow-y-scroll'
+          id='json-output'
+        >
+          {}
+      </pre>
+      </div>
+    </main>
+  </body>
+  <script>
+    import { actions } from 'astro:actions';
+
+    const button = document.getElementById('search-button');
+    const input = document.getElementById('spell-input') as HTMLInputElement;
+    const output = document.getElementById('json-output');
+
+    button?.addEventListener('click', async () => {
+      if (!input || !input.value) return;
+      const { data, error } = await actions.getSpell({ value: input.value });
+      console.log({ data, error, spellId: input.value });
+
+      if (!error && data && output) {
+        output.innerHTML = JSON.stringify(data, null, 2);
+      }
+    });
+  </script>
+</html>
