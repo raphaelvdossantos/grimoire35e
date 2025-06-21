@@ -37,7 +37,6 @@ app.get('/api/spells', async (req: Request, res: Response) => {
 
 // Example route with types
 app.get('/api/spells/:spellName', async (req: Request, res: Response) => {
-  console.log('something');
   const spell = await prisma.spell.findUnique({
     where: {
       id: req.params.spellName,

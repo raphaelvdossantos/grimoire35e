@@ -7,7 +7,6 @@ const seedDatabase = async () => {
   try {
     const data = require(jsonPath);
 
-    console.log(`Reading data from ${jsonPath}:`, data);
     if (!data) return;
 
     const spellsPromises = data.map((spell: Spell) =>
@@ -30,7 +29,6 @@ const seedDatabase = async () => {
             description: spell.description,
           },
         });
-        console.log('Added spell: ', createdSpell.name);
       })()
     );
 
