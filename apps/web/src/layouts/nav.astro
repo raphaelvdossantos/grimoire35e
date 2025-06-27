@@ -8,12 +8,13 @@ const routes = [
 <nav
   class='w-full bg-[#232136] border-b border-[#313244] py-3 px-4 sm:px-8 flex items-center gap-6'
 >
-  <div class='flex gap-4'>
+  <div class='flex gap-x-4 p-0'>
+    <img src='/logo.png' class='aspect-square w-10 m-0' />
     {
       routes.map((route) => (
         <a
           href={route.path}
-          class="text-[#a6adc8] hover:text-[#f5e0dc] font-semibold transition-colors duration-150 py-1 px-2 rounded-md
+          class="text-[#a6adc8] hover:text-[#f5e0dc] font-bold transition-colors duration-150 py-1 px-2 rounded-md text-xl
           {Astro.url.pathname === route.path ? 'bg-[#181825] text-[#f5e0dc]' : ''}"
         >
           {route.name}
